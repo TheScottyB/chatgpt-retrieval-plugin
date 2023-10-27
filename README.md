@@ -73,8 +73,8 @@ Follow these steps to quickly set up and run the ChatGPT Retrieval Plugin:
 8. Create a [bearer token](#general-environment-variables)
 9. Set the required environment variables:
 
+# Optional environment variables used when running Azure OpenAI
 
-   # Optional environment variables used when running Azure OpenAI
    export OPENAI_API_BASE=https://<AzureOpenAIName>.openai.azure.com/
    export OPENAI_API_TYPE=azure
    export OPENAI_EMBEDDINGMODEL_DEPLOYMENTID=<Name of text-embedding-ada-002 model deployment>
@@ -82,39 +82,47 @@ Follow these steps to quickly set up and run the ChatGPT Retrieval Plugin:
    export OPENAI_COMPLETIONMODEL_DEPLOYMENTID=<Name of general model deployment used for completion>
    export OPENAI_EMBEDDING_BATCH_SIZE=<Batch size of embedding, for AzureOAI, this value need to be set as 1>
 
-   # Add the environment variables for your chosen vector DB.
-   # Some of these are optional; read the provider's setup docs in /docs/providers for more information.
+# Add the environment variables for your chosen vector DB
 
-   # Pinecone
-   export PINECONE_API_KEY=606125fc-c5db-4d1c-9744-d7e07d74236a
-   export PINECONE_ENVIRONMENT=us-east1-gcp
-   export PINECONE_INDEX=chatgtp-pr
-   # Weaviate
+# Some of these are optional; read the provider's setup docs in /docs/providers for more information
+
+# Pinecone
+
+   export PINECONE_API_KEY=
+   export PINECONE_ENVIRONMENT=
+   export PINECONE_INDEX=
+
+# Weaviate
+
    export WEAVIATE_URL=<your_weaviate_instance_url>
    export WEAVIATE_API_KEY=<your_api_key_for_WCS>
    export WEAVIATE_CLASS=<your_optional_weaviate_class>
 
-   # Zilliz
+# Zilliz
+
    export ZILLIZ_COLLECTION=<your_zilliz_collection>
    export ZILLIZ_URI=<your_zilliz_uri>
    export ZILLIZ_USER=<your_zilliz_username>
    export ZILLIZ_PASSWORD=<your_zilliz_password>
 
-   # Milvus
+# Milvus
+
    export MILVUS_COLLECTION=<your_milvus_collection>
    export MILVUS_HOST=<your_milvus_host>
    export MILVUS_PORT=<your_milvus_port>
    export MILVUS_USER=<your_milvus_username>
    export MILVUS_PASSWORD=<your_milvus_password>
 
-   # Qdrant
+# Qdrant
+
    export QDRANT_URL=<your_qdrant_url>
    export QDRANT_PORT=<your_qdrant_port>
    export QDRANT_GRPC_PORT=<your_qdrant_grpc_port>
    export QDRANT_API_KEY=<your_qdrant_api_key>
    export QDRANT_COLLECTION=<your_qdrant_collection>
 
-   # AnalyticDB
+# AnalyticDB
+
    export PG_HOST=<your_analyticdb_host>
    export PG_PORT=<your_analyticdb_port>
    export PG_USER=<your_analyticdb_username>
@@ -122,8 +130,8 @@ Follow these steps to quickly set up and run the ChatGPT Retrieval Plugin:
    export PG_DATABASE=<your_analyticdb_database>
    export PG_COLLECTION=<your_analyticdb_collection>
 
+# Redis
 
-   # Redis
    export REDIS_HOST=<your_redis_host>
    export REDIS_PORT=<your_redis_port>
    export REDIS_PASSWORD=<your_redis_password>
@@ -132,36 +140,42 @@ Follow these steps to quickly set up and run the ChatGPT Retrieval Plugin:
    export REDIS_DISTANCE_METRIC=<your_redis_distance_metric>
    export REDIS_INDEX_TYPE=<your_redis_index_type>
 
-   # Llama
+# Llama
+
    export LLAMA_INDEX_TYPE=<gpt_vector_index_type>
    export LLAMA_INDEX_JSON_PATH=<path_to_saved_index_json_file>
    export LLAMA_QUERY_KWARGS_JSON_PATH=<path_to_saved_query_kwargs_json_file>
    export LLAMA_RESPONSE_MODE=<response_mode_for_query>
 
-   # Chroma
+# Chroma
+
    export CHROMA_COLLECTION=<your_chroma_collection>
    export CHROMA_IN_MEMORY=<true_or_false>
    export CHROMA_PERSISTENCE_DIR=<your_chroma_persistence_directory>
    export CHROMA_HOST=<your_chroma_host>
    export CHROMA_PORT=<your_chroma_port>
 
-   # Azure Cognitive Search
+# Azure Cognitive Search
+
    export AZURESEARCH_SERVICE=<your_search_service_name>
    export AZURESEARCH_INDEX=<your_search_index_name>
    export AZURESEARCH_API_KEY=<your_api_key> (optional, uses key-free managed identity if not set)
 
-   # Supabase
+# Supabase
+
    export SUPABASE_URL=<supabase_project_url>
    export SUPABASE_ANON_KEY=<supabase_project_api_anon_key>
 
-   # Postgres
+# Postgres
+
    export PG_HOST=<postgres_host>
    export PG_PORT=<postgres_port>
    export PG_USER=<postgres_user>
    export PG_PASSWORD=<postgres_password>
    export PG_DB=<postgres_database>
 
-   # Elasticsearch
+# Elasticsearch
+
    export ELASTICSEARCH_URL=<elasticsearch_host_and_port> (either specify host or cloud_id)
    export ELASTICSEARCH_CLOUD_ID=<elasticsearch_cloud_id>
 
@@ -172,6 +186,7 @@ Follow these steps to quickly set up and run the ChatGPT Retrieval Plugin:
    export ELASTICSEARCH_INDEX=<elasticsearch_index_name>
    export ELASTICSEARCH_REPLICAS=<elasticsearch_replicas>
    export ELASTICSEARCH_SHARDS=<elasticsearch_shards>
+
    ```
 
 10. Run the API locally: `poetry run start`
@@ -234,9 +249,9 @@ The plugin exposes the following endpoints for upserting, querying, and deleting
 
 - `/delete`: This endpoint allows deleting one or more documents from the vector database using their IDs, a metadata filter, or a delete_all flag. The endpoint expects at least one of the following parameters in the request body: `ids`, `filter`, or `delete_all`. The `ids` parameter should be a list of document IDs to delete; all document chunks for the document with these IDS will be deleted. The `filter` parameter should contain a subset of the following subfields: `source`, `source_id`, `document_id`, `url`, `created_at`, and `author`. The `delete_all` parameter should be a boolean indicating whether to delete all documents from the vector database. The endpoint returns a boolean indicating whether the deletion was successful.
 
-The detailed specifications and examples of the request and response models can be found by running the app locally and navigating to http://0.0.0.0:8000/openapi.json, or in the OpenAPI schema [here](/.well-known/openapi.yaml). Note that the OpenAPI schema only contains the `/query` endpoint, because that is the only function that ChatGPT needs to access. This way, ChatGPT can use the plugin only to retrieve relevant documents based on natural language queries or needs. However, if developers want to also give ChatGPT the ability to remember things for later, they can use the `/upsert` endpoint to save snippets from the conversation to the vector database. An example of a manifest and OpenAPI schema that gives ChatGPT access to the `/upsert` endpoint can be found [here](/examples/memory).
+The detailed specifications and examples of the request and response models can be found by running the app locally and navigating to <http://0.0.0.0:8000/openapi.json>, or in the OpenAPI schema [here](/.well-known/openapi.yaml). Note that the OpenAPI schema only contains the `/query` endpoint, because that is the only function that ChatGPT needs to access. This way, ChatGPT can use the plugin only to retrieve relevant documents based on natural language queries or needs. However, if developers want to also give ChatGPT the ability to remember things for later, they can use the `/upsert` endpoint to save snippets from the conversation to the vector database. An example of a manifest and OpenAPI schema that gives ChatGPT access to the `/upsert` endpoint can be found [here](/examples/memory).
 
-To include custom metadata fields, edit the `DocumentMetadata` and `DocumentMetadataFilter` data models [here](/models/models.py), and update the OpenAPI schema [here](/.well-known/openapi.yaml). You can update this easily by running the app locally, copying the JSON found at http://0.0.0.0:8000/sub/openapi.json, and converting it to YAML format with [Swagger Editor](https://editor.swagger.io/). Alternatively, you can replace the `openapi.yaml` file with an `openapi.json` file.
+To include custom metadata fields, edit the `DocumentMetadata` and `DocumentMetadataFilter` data models [here](/models/models.py), and update the OpenAPI schema [here](/.well-known/openapi.yaml). You can update this easily by running the app locally, copying the JSON found at <http://0.0.0.0:8000/sub/openapi.json>, and converting it to YAML format with [Swagger Editor](https://editor.swagger.io/). Alternatively, you can replace the `openapi.yaml` file with an `openapi.json` file.
 
 ## Development
 
@@ -249,32 +264,42 @@ Install Python 3.10 on your machine if it isn't already installed. It can be dow
 Clone the repository from GitHub:
 
 ```
-git clone https://github.com/openai/chatgpt-retrieval-plugin.git
+
+git clone <https://github.com/openai/chatgpt-retrieval-plugin.git>
+
 ```
 
 Navigate to the cloned repository directory:
 
 ```
+
 cd /path/to/chatgpt-retrieval-plugin
+
 ```
 
 Install poetry:
 
 ```
+
 pip install poetry
+
 ```
 
 Create a new virtual environment that uses Python 3.10:
 
 ```
+
 poetry env use python3.10
 poetry shell
+
 ```
 
 Install app dependencies using poetry:
 
 ```
+
 poetry install
+
 ```
 
 **Note:** If adding dependencies in the `pyproject.toml`, make sure to run `poetry lock` and `poetry install`.
@@ -367,19 +392,23 @@ For detailed setup instructions, refer to [`/docs/providers/llama/setup.md`](/do
 To run the API locally, you first need to set the requisite environment variables with the `export` command:
 
 ```
+
 export DATASTORE=<your_datastore>
 export BEARER_TOKEN=<your_bearer_token>
 export OPENAI_API_KEY=<your_openai_api_key>
 <Add the environment variables for your chosen vector DB here>
+
 ```
 
 Start the API with:
 
 ```
+
 poetry run start
+
 ```
 
-Append `docs` to the URL shown in the terminal and open it in a browser to access the API documentation and try out the endpoints (i.e. http://0.0.0.0:8000/docs). Make sure to enter your bearer token and test the API endpoints.
+Append `docs` to the URL shown in the terminal and open it in a browser to access the API documentation and try out the endpoints (i.e. <http://0.0.0.0:8000/docs>). Make sure to enter your bearer token and test the API endpoints.
 
 **Note:** If you add new dependencies to the pyproject.toml file, you need to run `poetry lock` and `poetry install` to update the lock file and install the new dependencies.
 
@@ -527,7 +556,9 @@ If you'd like to contribute, please follow the checklist below when submitting a
 Use the following naming convention for your PR branches:
 
 ```
+
 <type>/<short-description>-<issue-number>
+
 ```
 
 - `<type>`: The type of PR, such as `bugfix`, `feature`, `enhancement`, `refactor`, or `docs`. Multiple types are ok and should appear as <type>, <type2>
@@ -537,7 +568,9 @@ Use the following naming convention for your PR branches:
 Example:
 
 ```
+
 feature/advanced-chunking-strategy-123
+
 ```
 
 ## Limitations
