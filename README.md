@@ -73,10 +73,6 @@ Follow these steps to quickly set up and run the ChatGPT Retrieval Plugin:
 8. Create a [bearer token](#general-environment-variables)
 9. Set the required environment variables:
 
-   ```
-   export DATASTORE=pinecone
-   export BEARER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-   export OPENAI_API_KEY=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
 
    # Optional environment variables used when running Azure OpenAI
    export OPENAI_API_BASE=https://<AzureOpenAIName>.openai.azure.com/
