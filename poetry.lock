@@ -249,24 +249,19 @@ msal-extensions = ">=0.3.0,<2.0.0"
 
 [[package]]
 name = "azure-search-documents"
-version = "11.4.0a20230509004"
+version = "11.4.0b8"
 description = "Microsoft Azure Cognitive Search Client Library for Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "azure-search-documents-11.4.0a20230509004.zip", hash = "sha256:6cca144573161a10aa0fcd13927264453e79c63be6a53cf2ec241c9c8c22f6b5"},
-    {file = "azure_search_documents-11.4.0a20230509004-py3-none-any.whl", hash = "sha256:6215e9a4f9e935ff3eac1b7d5519c6c0789b4497eb11242d376911aaefbb0359"},
+    {file = "azure-search-documents-11.4.0b8.zip", hash = "sha256:b178ff52918590191a9cb7f411a9ab3cb517663666a501a3e84b715d19b0d93b"},
+    {file = "azure_search_documents-11.4.0b8-py3-none-any.whl", hash = "sha256:4137daa2db75bff9484d394c16c0604822a51281cad2f50e11d7c48dd8d4b4cf"},
 ]
 
 [package.dependencies]
 azure-common = ">=1.1,<2.0"
 azure-core = ">=1.24.0,<2.0.0"
 isodate = ">=0.6.0"
-
-[package.source]
-type = "legacy"
-url = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-python/pypi/simple"
-reference = "azure-sdk-dev"
 
 [[package]]
 name = "backoff"
